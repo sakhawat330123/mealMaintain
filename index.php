@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if(!isset($_SESSION['loginId']))
+  header("Location:registration.php");
+
+ ?>
+
+
+
 <?php include "include/header.php"; ?>
 
 

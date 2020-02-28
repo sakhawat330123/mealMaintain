@@ -1,3 +1,30 @@
+<?php 
+
+include 'include/function.php';
+include 'include/connection.php';
+
+$regId = $regPwd = $regName = "";
+
+if (isset($_POST['regSubmit'])) {
+    $regId = check_data($_POST['regId']);
+    $regName = check_data($_POST['regName']);
+    $regPwd = check_data($_POST['regPwd']);
+
+    $sql = "INSERT INTO `reg`(`reg_id`, `regName`, `regPass`) VALUES ($regId, '$regName', '$regPwd')";
+
+    $fire = $conn->qurey($sql);
+    if ($fire == true) {
+        header("Location:login.php");
+    }else{
+        echo "Error". $sql. "<br>". $conn->error;
+        header("Location:registration.php");
+    }
+}
+
+
+ ?>
+
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -9,7 +36,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
+    <title>MEAL REGISTER</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,25 +70,25 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                         <div class="form-group">
-                            <label>User Name</label>
-                            <input type="email" class="form-control" placeholder="User Name">
+                            <label>ID</label>
+                            <input type="number" class="form-control" placeholder="ID" name="regId" required>
                         </div>
                             <div class="form-group">
-                                <label>Email address</label>
-                                <input type="email" class="form-control" placeholder="Email">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Name" name="regName" required>
                         </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" placeholder="Password">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Password" name="regPwd" required>
                         </div>
-                                    <div class="checkbox">
-                                        <label>
+                        <div class="checkbox">
+                            <label>
                                 <input type="checkbox"> Agree the terms and policy
                             </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                        </div>
+                        <button type="submit" name="regSubmit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
                                     <div class="social-login-content">
                                         <div class="social-button">
                                             <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Register with facebook</button>
@@ -69,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="register-link m-t-15 text-center">
-                                        <p>Already have account ? <a href="#"> Sign in</a></p>
+                                        <p>Already have account ? <a href="login.php"> Sign in</a></p>
                                     </div>
                     </form>
                 </div>
