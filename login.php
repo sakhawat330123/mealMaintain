@@ -1,21 +1,23 @@
 <?php
   session_start();
+  if(isset($_SESSION['regId']))
+  header("Location:index.php");
 
-    include "includes/fucntion.php";
-    $regId = $regPwd = $regName = "";
+    include 'include/function.php';
+    $regId = $regPwd = "";
 
     if( isset($_POST['singInBtn'])){
-        include_once "includes/connection.php";
+        include 'include/connection.php';
+
         $regId = check_data($_POST['regId']);
         $regPwd = check_data($_POST['regPwd']);
-        $regName = check_data($_POST['regName']);
         
-        $loginSql = "SELECT * FROM login WHERE office_id=$loginId && password = '$loginPass'";
+        $loginSql = "SELECT * FROM `mealreg` WHERE `reg_id`=$regId && `regPass` = '$regPwd'";
 
         $logFire = $conn->query($loginSql);
 
         if ($logFire->num_rows>0) {
-          $_SESSION["loginId"] = $regName;
+          $_SESSION["regId"] = $regId;
           header("Location:index.php");
         }else {
           header("Location:registration.php");

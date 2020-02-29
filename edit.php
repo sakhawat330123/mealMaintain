@@ -1,3 +1,27 @@
+<?php 
+session_start();
+if(!isset($_SESSION['regId']))
+  header("Location:registration.php");
+ ?>
+ <?php 
+    include 'include/connection.php';
+
+     $sql = "SELECT * FROM `addmember`";
+     $result = $conn->query($sql);
+
+     if (isset($_POST['edit_id'])) {
+     	echo $_POST['edit_id'];
+     }
+
+
+  ?>
+
+
+
+
+
+
+
 <?php include "include/header.php"; ?>
 
 

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['loginId']))
+if(!isset($_SESSION['regId']))
   header("Location:registration.php");
 
  ?>

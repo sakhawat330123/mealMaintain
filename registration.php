@@ -10,9 +10,9 @@ if (isset($_POST['regSubmit'])) {
     $regName = check_data($_POST['regName']);
     $regPwd = check_data($_POST['regPwd']);
 
-    $sql = "INSERT INTO `reg`(`reg_id`, `regName`, `regPass`) VALUES ($regId, '$regName', '$regPwd')";
+    $sql = "INSERT INTO `mealReg`(`reg_id`, `regName`, `regPass`) VALUES ($regId, '$regName', '$regPwd')";
 
-    $fire = $conn->qurey($sql);
+    $fire = $conn->query($sql);
     if ($fire == true) {
         header("Location:login.php");
     }else{

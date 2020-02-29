@@ -1,10 +1,19 @@
+<?php 
+session_start();
+if(!isset($_SESSION['regId']))
+  header("Location:registration.php");
+ ?>
+ <?php 
+    include 'include/connection.php';
+
+     $sql = "SELECT * FROM `addmember`";
+     $result = $conn->query($sql);
+  ?>
+
+
 <?php include "include/header.php"; ?>
-
-
     <!-- Left Panel -->
-
 <?php include "include/nav.php"; ?>
-
     <!-- Left Panel -->
 
     <!-- Right Panel -->
@@ -20,80 +29,56 @@
         	                    <strong class="card-title">Member List</strong>
         	                </div>
         	                <div class="card-body">
-        	                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-        	                        <thead>
-        	                            <tr>
-        	                                <th>Total</th>
-        	                                <th>ID</th>
-        	                                <th>Name</th>
-        	                                <th>Designation</th>
-        	                                <th>Advance</th>
-        	                            </tr>
-        	                        </thead>
-        	                        <tbody>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                            <tr>
-        	                                <td>#</td>
-        	                                <td>Customer Support</td>
-        	                                <td>New York</td>
-        	                                <td>New York</td>
-        	                                <td>$112,000</td>
-        	                            </tr>
-        	                        </tbody>
-        	                    </table>
+                                <?php 
+                                    if ($result->num_rows > 0) {
+
+                                ?>
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Designation</th>
+                                            <th>Advance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    <?php
+                                        $i = 1;
+                                        $total = 0;   
+                                        while ($row = $result->fetch_assoc()) {                                                
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $row['addMemberId'];?></td>
+                                            <td><?php echo $row['addMemberName'];?></td>
+                                            <td><?php echo $row['addMemberDes'];?></td>
+                                            <td><?php echo $row['addMemberAdvance'];?></td>
+                                        </tr>           
+
+                                    <?php
+                                        $total = $total + $row['addMemberAdvance'];
+
+                                        $i++;
+                                            }
+                                            ?>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Total Amount = </td>
+                                            <td> <?php echo $total;?>/=</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    <?php 
+                                        }
+                                     ?>                       
         	                </div>
         	            </div>
         	        </div>
-
-
         	    </div>
         	</div><!-- .animated -->
 

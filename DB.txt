@@ -1,0 +1,9 @@
+// mealReg table
+
+CREATE TABLE `meal`.`mealReg` ( `autoid` INT NOT NULL AUTO_INCREMENT , `reg_id` INT NOT NULL , `regName` VARCHAR(120) NOT NULL , `regPass` VARCHAR(25) NOT NULL , PRIMARY KEY (`autoid`)) ENGINE = InnoDB;
+
+
+// Member data table
+
+table Name = `addmember`
+fild Name = 'autoid`, `addMemberId`, `addMemberName`, `addMemberDes`, `addMemberAdvance`
