@@ -28,7 +28,7 @@ if(!isset($_SESSION['regId']))
                             <div class="card-header">
                                 <strong class="card-title">Member List</strong>
                             </div>
-                            <form action="edit.php" method="post"></form>
+                            <form action="edit.php" method="get"></form>
                             <div class="card-body">
                                 <?php 
                                     if ($result->num_rows > 0) {

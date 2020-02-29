@@ -7,3 +7,12 @@ CREATE TABLE `meal`.`mealReg` ( `autoid` INT NOT NULL AUTO_INCREMENT , `reg_id` 
 
 table Name = `addmember`
 fild Name = 'autoid`, `addMemberId`, `addMemberName`, `addMemberDes`, `addMemberAdvance`
+
+
+
+
+
+
+
+
+		    	        
