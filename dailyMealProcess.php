@@ -2,16 +2,26 @@
 session_start();
 if(!isset($_SESSION['regId']))
   header("Location:registration.php");
-
  ?>
 
 
 <?php 
+	include 'include/connection.php';
 
     if (isset($_POST['dateFild'])) 
-      	echo $_POST['dateFild'];
+      	$date = $_POST['dateFild'];
 
-      	    }
+    echo $date;
+    $sql = "SELECT * FROM `addmember`";
+    $result = $conn->query($sql);
+
+
+
+
+
+
+
+
 
  ?>
 
@@ -39,38 +49,59 @@ if(!isset($_SESSION['regId']))
         	                </div>
                             <form action="dailyMealProcess.php" method="POST">
         	                <div class="card-body">
-                                
+                                <?php 
+
+                                	if ($result->num_rows > 0) {
+                                	    
+
+                                ?>
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Abcent</th>
+                                            <th>Present</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                <?php  
+
+                                while($row = $result->fetch_assoc()) {
+
+                                ?>
+
+
+                                <tr>
+                                    <td>1</td>
+                                    <td><?php echo $row["addMemberId"]; ?></td>
+                                    <td><?php echo $row["addMemberName"]; ?></td>
+                                    <td>
+                                    	<div class="form-group">
+                                    	      <select class="form-control" id="sel1" name="sellist1">
+                                    	        <option>1</option>
+                                    	        <option>2</option>
+                                    	        <option>3</option>
+                                    	        <option>0</option>
+                                    	      </select>
+                                    	</div>
+                                    </td>
+                                </tr>
+
+
+                                <?php 
+
+                                    
+                                } else {
+                                    echo "0 results";
+                                }
+                                 ?>                            
+
+
                                
-        	                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-        	                        <thead>
-        	                            <tr>
-        	                                <th>Sl No</th>
-        	                                <th>ID</th>
-        	                                <th>Name</th>
-        	                                <th>Abcent</th>
-        	                                <th>Present</th>
-        	                            </tr>
-        	                        </thead>
-        	                        <tbody>
-        	                            <tr>
-        	                                <td>1</td>
-        	                                <td>20160360</td>
-        	                                <td>Sakhawat</td>
-                                            <td>
-                                            	<div class="form-check">
-	                                            	<label class="form-check-label" for="radio1">
-	                                            	    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >Absent
-	                                            	</label>
-                                            	</div>                                            	
-                                            </td>
-                                            <td>
-                                            	<div class="form-check">
-                                            	  	<label class="form-check-label" for="radio2">
-                                            	    	<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2" checked>Present
-                                            	  	</label>
-                                            	</div>
-                                            </td>
-        	                            </tr>
+        	                   
+        	                            
         	                            <tr>
         	                                <td></td>
         	                                <td>Bazar TK =</td>
@@ -82,6 +113,7 @@ if(!isset($_SESSION['regId']))
         	                    </table>
         	                    <input type="submit" value="SAVE">
         	                  </form>
+        	              <?php } ?>
         	                </div>
         	            </div>
         	        </div>
