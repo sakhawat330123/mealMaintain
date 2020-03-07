@@ -8,40 +8,12 @@ if(!isset($_SESSION['regId']))
     include 'include/function.php';
 	$done = $err = $editId = "";
 
-	$editId = $_GET['edit_id'];
+		$getId = $_GET['edit_id'];
 
-     $sqlS = "SELECT * FROM `addmember` WHERE `autoid` = $editId";
-     $result = $conn->query($sqlS);
+	 	$sqlS = "SELECT * FROM `addmember` WHERE `autoid` = $getId";
+	 	$result = $conn->query($sqlS);
 
-
-	
-    if( isset($_POST['editMember'])){
-
-    $addMemberId = check_data($_POST['addMemberId']);
-    $addMemberName = check_data($_POST['addMemberName']);
-    $addMemberDes = check_data($_POST['addMemberDes']);
-    $addMemberAdvance = check_data($_POST['addMemberAdvance']);
-
-    echo $editId;
-
-    $sql ="";
-
-    // $fire = $conn->query($sql);
-
-    // if ($fire == true) {
-    // 	$done = "Data Update Successfully";
-    // }else{
-    // 	$err = "Error: " . $sql . "<br>" . $conn->error;
-    // }
-
-  }
-
-
-
-
-
- ?>
-
+?>
 
 
 
@@ -62,7 +34,8 @@ if(!isset($_SESSION['regId']))
         	<?php 
         		     while($row = $result->fetch_assoc()) {
          	?>
-			<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+			<form method="post" action="editProcess.php">
+				<input type="hidden"  name="editid" value="<?php echo $row["autoid"]; ?>"  >
 			  <div class="form-group row">
 			    <label for="example-text-input" class="col-2 col-form-label">ID : </label>
 			    <div class="col-10">

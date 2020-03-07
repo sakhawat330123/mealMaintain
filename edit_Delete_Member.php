@@ -27,8 +27,17 @@ if(!isset($_SESSION['regId']))
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Member List</strong>
+                                <span class="text-success">
+                                    <?php 
+                                        if (isset($_SESSION['updateMsg'])) {
+                                            echo $_SESSION['updateMsg'];
+                                            unset($_SESSION['updateMsg']);
+                                        }
+
+                                     ?>
+                                </span>
                             </div>
-                            <form action="edit.php" method="get"></form>
+                            <form action="edit.php" method="post"></form>
                             <div class="card-body">
                                 <?php 
                                     if ($result->num_rows > 0) {
